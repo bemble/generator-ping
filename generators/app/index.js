@@ -41,6 +41,8 @@ module.exports = generators.Base.extend({
   },
 
   install: function () {
+    this.composeWith('ping:ide');
+
     this.composeWith('ping:page', {
       options: {
         name: 'home',
