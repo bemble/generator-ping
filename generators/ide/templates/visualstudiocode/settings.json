@@ -1,0 +1,15 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "editor.tabSize": 2,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "node_modules": true,
+    ".idea": true,
+    "src/**/*.js": true,
+    "src/**/*.css": true,
+    "test/karma/**/*.js": true,
+    "test/protractor/**/*.js": true
+  },
+  "files.encoding": "utf8"
+}

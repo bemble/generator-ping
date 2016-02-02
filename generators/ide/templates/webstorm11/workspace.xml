@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RunManager" selected="Karma.Karma tests">
+    <configuration default="false" name="Karma tests" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="$PROJECT_DIR$/test/karma.conf.js">
+      <karma-package-dir value="$PROJECT_DIR$/node_modules/karma" />
+      <envs />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Karma.Karma tests" />
+    </list>
+  </component>
+</project>

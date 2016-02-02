@@ -35,6 +35,7 @@ module.exports = generators.Base.extend({
       }
     }
     var typingsToInstall = [
+      new TypingDependency('node'),
       new TypingDependency('jquery'),
       new TypingDependency('angular'),
       new TypingDependency('angular-material'),

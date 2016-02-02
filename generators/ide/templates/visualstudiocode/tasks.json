@@ -1,0 +1,45 @@
+{
+  "version": "0.1.0",
+  "command": "gulp",
+  "isShellCommand": true,
+  "args": [
+    "--no-color"
+  ],
+  "tasks": [
+    {
+      "taskName": "default",
+      "args": [],
+      "isTestCommand": true,
+      "isWatching": true,
+      "showOutput": "silent",
+      "problemMatcher": {
+        "watching": {
+          "activeOnStart": true,
+          "beginsPattern": "^\\[[\\d:]+\\] Finished 'typescript",
+          "endsPattern": "^PhantomJS (.*): Executed.*secs\\)$"
+        },
+        "fileLocation": [
+          "relative",
+          "${workspaceRoot}"
+        ],
+        "pattern": [
+          {
+            "regexp": "(Expected.+\\.)$",
+            "message": 1
+          },
+          {
+            "regexp": "<-\\s(.*\\.ts):(\\d+):(\\d+)$",
+            "file": 1,
+            "line": 2,
+            "column": 3
+          }
+        ]
+      }
+    },
+    {
+      "taskName": "build",
+      "args": [],
+      "isBuildCommand": true
+    }
+  ]
+}

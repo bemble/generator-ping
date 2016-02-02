@@ -17,6 +17,7 @@ npm install -g generator-ping
 * `karma` and `protractor` tests
 * build process
 * `component`, `page` & angular `service` generation helpers (with their tests), see below
+* IDE configuration (Webstorm & VisualStudio Code)
 
 ## Generation helpers
 
@@ -42,3 +43,28 @@ yo ping:page
 ```sh
 yo ping:service
 ```
+### IDE configuration
+
+You might want to configure your IDE to quickly start developing without spending time with configuration.
+Just do the following command and select you IDE:
+
+```sh
+yo ping:ide
+```
+
+See just below what the generator do to your IDE.
+
+#### WebStorm
+
+* Javascript standard used is ES6 (to prevent any warning or error in node some files (gulp for example))
+* UTF-8 file encoding
+* `Karma tests` run task configured
+
+#### VisualStudio Code
+
+* Javascript standard used is ES6 (to prevent any warning or error in node some files (gulp for example))
+* UTF-8 file encoding
+* tab size set to 2
+* some files are excluded from the project tree
+* the `test` task with problem matcher is configured to run `default` gulp task and match Karma errors
+* the `build` task is configured to run `build` gulp task
