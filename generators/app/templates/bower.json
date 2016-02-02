@@ -1,0 +1,6 @@
+{
+  "name": "<%= name %>",
+  "moduleType": [],
+  "private": true,
+  "devDependencies": { }
+}

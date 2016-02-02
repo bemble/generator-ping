@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+.vscode
+node_modules
+bower_components
+typings
+dist
+src/**/*.js
+src/**/*.css
+test/**/*.js

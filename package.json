@@ -1,0 +1,35 @@
+{
+  "name": "generator-ping",
+  "version": "0.9.0",
+  "description": "Yeoman generator to bootstrap AngularJs component oriented application, flavored with Typescript and other stuff.",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "generators"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pierrecle/generator-ping.git"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Pierre CLEMENT <pierre@clement.re> (http://www.pierre-clement.info)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pierrecle/generator-ping/issues"
+  },
+  "homepage": "https://github.com/pierrecle/generator-ping#readme",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "string": "^3.3.1",
+    "typings": "^0.6.4",
+    "yeoman-generator": "^0.22.3"
+  },
+  "devDependencies": {
+    "yeoman-test": "^1.0.0"
+  }
+}

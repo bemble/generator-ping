@@ -1,0 +1,12 @@
+extends ../../src/index
+
+block body
+  #{params.component}
+
+script
+  | (function() {
+  |   angular.module('<?= name ?>').config(['$routeProvider', function($routeProvider) {
+  |     // Remove the default route
+  |     $routeProvider.otherwise(undefined);
+  |   }]);
+  | })();
