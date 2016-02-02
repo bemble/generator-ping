@@ -24,6 +24,6 @@ module.exports = generators.Base.extend({
     this.fs.writeJSON(this.destinationPath('package.json'), currentPkg);
 
     this.template('**/*', './', {name: currentPkg.name}, {delimiter: "?"});
-    this.copy(this.templatePath('.gitignore'), this.destinationPath('.gitignore'));
+    this.copy(this.templatePath('..gitignore'), this.destinationPath('.gitignore'));
   }
 });

@@ -1,6 +1,6 @@
 {
   "name": "generator-ping",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Yeoman generator to bootstrap AngularJs component oriented application, flavored with Typescript and other stuff.",
   "main": "index.js",
   "files": [
