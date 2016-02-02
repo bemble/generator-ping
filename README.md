@@ -22,19 +22,22 @@ npm install -g generator-ping
 
 ### Create a new component
 
+Components are created in the `src/components` folder.
+This generator also bootstraps `karma` and `protractor` tests.
+
 ```sh
 yo ping:component
 ```
 
 ### Create a new page
 
-A page is a component with its route configured in application `src/app.ts`
+A page is a component, prefixed with `Page`, with its route configured in the application (`src/app.ts`).
 
 ```sh
 yo ping:page
 ```
 
-### Create a new angular service
+### Create a new AngularJs service
 
 ```sh
 yo ping:service
