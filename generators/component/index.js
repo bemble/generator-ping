@@ -7,6 +7,13 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
 
+    this.option('appName', {
+      type: String,
+      required: true,
+      desc: 'Application name',
+      default: S(this.determineAppname()).dasherize.s
+    });
+
     this.option('name', {
       type: String,
       required: true,
@@ -16,64 +23,66 @@ module.exports = generators.Base.extend({
     this.option('prefix', {
       type: String,
       required: true,
-      desc: 'Component tag prefix'
+      desc: 'Component HTML tag prefix',
+      default: 'pg'
     });
   },
 
   initializing: function () {
-    this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-
     this.props = {
-      appName: this.pkg.name,
+      appName: this.options.appName,
       name: this.options.name,
       nameCamel: null,
-      prefix: this.options.prefix !== undefined ? this.options.prefix : 'pg',
+      prefix: this.options.prefix ? this.options.prefix : '',
       directiveElementName: null
     };
   },
 
   prompting: function () {
-    var nameCallback = (done) => {
+    var nameCallback = () => {
       this.props.name = S(this.props.name).latinise().camelize().s;
       this.props.name = this.props.name[0].toUpperCase() + this.props.name.substr(1);
       this.props.nameCamel = this.props.name[0].toLowerCase() + this.props.name.substr(1);
       this.props.directiveElementName = S(this.props.nameCamel).dasherize();
-
-      let questions = [];
-      if(!this.options.prefix) {
-        questions.push({
-          type: 'input',
-          name: 'prefix',
-          message: 'HTML tag prefix:',
-          default: this.props.prefix
-        });
-      }
-
-      if(questions.length) {
-        this.prompt(questions, (answers) => {
-          this.props.prefix = (answers.prefix || '').toLowerCase();
-          done();
-        });
-      }
-      else {
-        done();
-      }
     };
 
+    let questions = [];
+
+    if (!this.props.appName) {
+      questions.push({
+        type: 'input',
+        name: 'appName',
+        message: 'Application name:'
+      });
+    }
+    if (!this.props.prefix) {
+      questions.push({
+        type: 'input',
+        name: 'prefix',
+        message: 'Component HTML tag prefix:',
+        default: this.props.prefix || null
+      });
+    }
     if (!this.props.name) {
-      var done = this.async();
-      this.prompt({
+      questions.push({
         type: 'input',
         name: 'name',
         message: 'Component name:'
-      }, (answers) => {
-        this.props.name = answers.name;
-        nameCallback(done);
+      });
+    }
+
+    if (questions.length) {
+      var done = this.async();
+      this.prompt(questions, (answers) => {
+        this.props.name = this.props.name || answers.name;
+        this.props.appName = this.props.appName || answers.appName;
+        this.props.prefix = (this.props.prefix || answers.prefix || '').toLowerCase();
+        nameCallback();
+        done();
       });
     }
     else {
-      var done = this.async();
-      nameCallback(done);
+      nameCallback();
     }
   },
 
