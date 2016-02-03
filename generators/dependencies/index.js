@@ -47,28 +47,30 @@ module.exports = generators.Base.extend({
     ];
     var typings = require('typings');
     var cwd = this.destinationPath();
-    // Init the "typings.json" file
-    typings.init({cwd: cwd}).then(() => {
-      var typingCwd = cwd + '/typings/';
-      var registry = require('typings/dist/lib/registry');
-      typingsToInstall.forEach((typing) => {
-        var version = registry.parseRegistryPath(typing.name).version;
-        // Get information about version etc
-        registry.getVersions(typing.source, typing.name, version).then((project) => {
-          version = project.versions[0];
-          // Finally can install the dependency
-          typings.installDependency(version.location, {
-            name: typing.name,
-            cwd: typingCwd,
-            saveDev: true,
-            source: typing.source,
-            ambient: typing.ambient
-          }).then(() => {
-            this.log.ok('typings for ' + typing.name + ' installed');
+    if (!this.skipTypings) {// Testing purpose
+      // Init the "typings.json" file
+      typings.init({cwd: cwd}).then(() => {
+        var typingCwd = cwd + '/typings/';
+        var registry = require('typings/dist/lib/registry');
+        typingsToInstall.forEach((typing) => {
+          var version = registry.parseRegistryPath(typing.name).version;
+          // Get information about version etc
+          registry.getVersions(typing.source, typing.name, version).then((project) => {
+            version = project.versions[0];
+            // Finally can install the dependency
+            typings.installDependency(version.location, {
+              name: typing.name,
+              cwd: typingCwd,
+              saveDev: true,
+              source: typing.source,
+              ambient: typing.ambient
+            }).then(() => {
+              this.log.ok('typings for ' + typing.name + ' installed');
+            });
           });
         });
       });
-    });
+    }
   },
 
   end: function () {
