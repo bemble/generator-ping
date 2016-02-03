@@ -6,7 +6,7 @@
 describe('Service: <%= name %>', () => {
   var service:Services.<%= name %>;
 
-  beforeEach(angular.mock.module("<%= appName %>"));
+  beforeEach(angular.mock.module('<%= appName %>'));
   beforeEach(angular.mock.inject(($injector:ng.auto.IInjectorService) => {
     service = <Services.<%= name %>> $injector.get('<%= nameCamel %>Service');
   }));
