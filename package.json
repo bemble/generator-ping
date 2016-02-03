@@ -8,7 +8,7 @@
     "generators"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -26,10 +26,11 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "string": "^3.3.1",
-    "typings": "^0.6.4",
+    "typings": "^0.6.5",
     "yeoman-generator": "^0.22.3"
   },
   "devDependencies": {
+    "yeoman-assert": "^2.1.1",
     "yeoman-test": "^1.0.0"
   }
 }
