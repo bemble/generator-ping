@@ -1,5 +1,6 @@
 /// <reference path="../../../../typings/protractor.d.ts" />
 
+'use strict';
 
 describe('Component: <%= name %>', () => {
 
