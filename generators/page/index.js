@@ -8,6 +8,13 @@ module.exports = generators.Base.extend({
     generators.Base.apply(this, arguments);
     this.conflicter.force = true;
 
+    this.option('appName', {
+      type: String,
+      required: true,
+      desc: 'Application name',
+      default: S(this.determineAppname()).dasherize.s
+    });
+
     this.option('name', {
       type: String,
       required: true,
@@ -17,7 +24,8 @@ module.exports = generators.Base.extend({
     this.option('prefix', {
       type: String,
       required: true,
-      desc: 'Page tag prefix'
+      desc: 'Page tag prefix',
+      default: 'pg'
     });
 
     this.option('link', {
@@ -28,14 +36,12 @@ module.exports = generators.Base.extend({
   },
 
   initializing: function () {
-    this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-
     this.props = {
-      appName: this.pkg.name,
+      appName: this.options.appName,
       name: this.options.name,
       nameCamel: null,
       link: this.options.link,
-      prefix: this.options.prefix !== undefined ? this.options.prefix : 'pg',
+      prefix: this.options.prefix,
       directiveElementName: null
     };
   },
@@ -46,50 +52,56 @@ module.exports = generators.Base.extend({
       this.props.name = 'Page' + this.props.name[0].toUpperCase() + this.props.name.substr(1);
       this.props.nameCamel = this.props.name[0].toLowerCase() + this.props.name.substr(1);
 
-      let questions = [];
-      if (!this.options.prefix) {
-        questions.push({
-          type: 'input',
-          name: 'prefix',
-          message: 'HTML tag prefix:',
-          default: this.props.prefix
-        });
-      }
-
-      if (!this.props.link) {
-        questions.push({
-          type: 'input',
-          name: 'link',
-          message: 'Page link:',
-          default: () => '/' + S(this.props.nameCamel).dasherize().s.slice(5)
-        });
-      }
-
-      var questionCallback = (answers) => {
-        if (answers) {
-          this.props.link = this.props.link || answers.link;
-          this.props.prefix = (this.props.prefix || answers.prefix).toLowerCase();
-        }
+      var computeDirectiveName = (answers) => {
+        this.props.link = this.props.link || answers.link;
         this.props.directiveElementName = (this.props.prefix ? this.props.prefix + '-' : '') + S(this.props.nameCamel).dasherize();
         done();
       };
 
-      if (questions.length) {
-        this.prompt(questions, questionCallback);
+      if (!this.props.link) {
+        this.prompt({
+          type: 'input',
+          name: 'link',
+          message: 'Page link:',
+          default: () => '/' + S(this.props.nameCamel).dasherize().s.slice(5)
+        }, computeDirectiveName);
       }
       else {
-        questionCallback();
+        computeDirectiveName();
       }
     };
 
+    let questions = [];
+    if (!this.props.appName) {
+      questions.push({
+        type: 'input',
+        name: 'appName',
+        message: 'Application name:'
+      });
+    }
     if (!this.props.name) {
-      var done = this.async();
-      this.prompt({
+      questions.push({
         type: 'input',
         name: 'name',
         message: 'Page name:'
-      }, (answers) => {
-        this.props.name = answers.name;
+      });
+    }
+    if (!this.props.prefix) {
+      questions.push({
+        type: 'input',
+        name: 'prefix',
+        message: 'Page HTML tag prefix:',
+        default: this.props.prefix || null
+      });
+    }
+
+    if (questions.length) {
+      var done = this.async();
+      this.prompt(questions, (answers) => {
+        this.props.appName = this.props.appName || answers.appName;
+        this.props.name = this.props.name || answers.name;
+        this.props.link = this.props.link || answers.link;
+        this.props.prefix = (this.props.prefix || answers.prefix || '').toLowerCase();
         nameCallback(done);
       });
     }
@@ -99,21 +111,38 @@ module.exports = generators.Base.extend({
     }
   },
 
-  install: function () {
+  createComponent: function () {
     this.composeWith('ping:component', {
       options: {
+        appName: this.props.appName,
         name: this.props.name,
         prefix: this.props.prefix
       }
+    }, {
+      local: require.resolve('../component')
     });
   },
 
   writing: function () {
-    var appTsFile = this.destinationRoot() + '/src/app.ts';
-    var appTs = fs.readFileSync(appTsFile, 'utf-8');
-    var regexp = /(\s*\.)(otherwise\(['"].*['"]\);)/;
-    var route = 'when(\'' + this.props.link + '\', { template: \'<' + this.props.directiveElementName + ' />\' })';
-    var newAppTs = appTs.replace(regexp, '$1' + route + '$1$2');
-    this.fs.write(appTsFile, newAppTs);
+    var appFile = this.destinationRoot() + '/src/app.';
+    var ext = ['ts', 'js'].find((ext) => {
+      try {
+        var file = appFile + ext;
+        fs.accessSync(file);
+        return true;
+      } catch(_) {}
+      return false;
+    });
+    if(ext) {
+      appFile += ext;
+      var appTs = fs.readFileSync(appFile, 'utf-8');
+      var regexp = /(\s*\.)(otherwise\(['"].*['"]\);)/;
+      var route = 'when(\'' + this.props.link + '\', { template: \'<' + this.props.directiveElementName + ' />\' })';
+      var newApp = appTs.replace(regexp, '$1' + route + '$1$2');
+      this.fs.write(appFile, newApp);
+    }
+    else {
+      this.log.info('no application file found');
+    }
   }
 });
