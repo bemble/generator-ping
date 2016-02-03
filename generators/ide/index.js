@@ -1,5 +1,6 @@
 'use strict';
 var generators = require('yeoman-generator');
+var S = require('string');
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -7,9 +8,9 @@ module.exports = generators.Base.extend({
     this.conflicter.force = true;
 
     this.ideFolderMapping = {
-      'WebStorm 11': '.idea',
+      'WebStorm': '.idea',
       'VisualStudio Code': '.vscode'
-    }
+    };
   },
 
   prompting: function () {
@@ -29,9 +30,8 @@ module.exports = generators.Base.extend({
   writing: function () {
     if (this.ide) {
       this.template(this.ide + '/**/*', this.ideFolderMapping[this.ideName]);
-      if(this.ide === 'webstorm11') {
-        var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-        this.template(this.ide + '/.name', this.ideFolderMapping[this.ideName] + '/.name', {name: pkg.name});
+      if(this.ide === 'webstorm') {
+        this.template(this.ide + '/.name', this.ideFolderMapping[this.ideName] + '/.name', {name: S(this.determineAppname()).dasherize().s});
       }
     }
   }
