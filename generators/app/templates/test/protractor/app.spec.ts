@@ -2,7 +2,7 @@
 
 
 describe('application: <%= name %>', () => {
-  it('has a h3 that contains "<%= name %>"', () => {
+  it('has a h1 that contains "<%= name %>"', () => {
     browser.get('/');
 
     var header:protractor.ElementFinder = element(by.css('body > md-toolbar'));

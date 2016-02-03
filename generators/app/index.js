@@ -8,8 +8,7 @@ module.exports = generators.Base.extend({
     generators.Base.apply(this, arguments);
 
     if(!this.fs.exists(this.destinationPath('package.json'))) {
-      console.error(chalk.bold.red('No "package.json" found, run "npm init" before!'));
-      process.exit(1);
+      throw chalk.bold.red('No "package.json" found, run "npm init" before!');
     }
   },
 
@@ -41,36 +40,37 @@ module.exports = generators.Base.extend({
   },
 
   install: function () {
-    this.composeWith('ping:ide');
+    if(!this.options.skipInstall) {
+      this.composeWith('ping:ide');
 
-    this.composeWith('ping:page', {
-      options: {
-        name: 'home',
-        link: '/',
-        prefix: 'pg'
-      }
-    });
+      this.composeWith('ping:page', {
+        options: {
+          name: 'home',
+          link: '/'
+        }
+      });
 
-    this.composeWith('', {}, {
-      local: require.resolve('../dependencies')
-    });
+      this.composeWith('ping:dependencies', {}, {
+        local: require.resolve('../dependencies')
+      });
 
-    this.composeWith('', {
-      options: {
-        name: this.props.name,
-        description: this.props.description
-      }
-    }, {
-      local: require.resolve('../configurations')
-    });
+      this.composeWith('ping:configurations', {
+        options: {
+          name: this.props.name,
+          description: this.props.description
+        }
+      }, {
+        local: require.resolve('../configurations')
+      });
 
-    this.composeWith('', {
-      options: {
-        name: this.props.name,
-        description: this.props.description
-      }
-    }, {
-      local: require.resolve('../readme')
-    });
+      this.composeWith('ping:readme', {
+        options: {
+          name: this.props.name,
+          description: this.props.description
+        }
+      }, {
+        local: require.resolve('../readme')
+      });
+    }
   }
 });
