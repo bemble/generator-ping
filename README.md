@@ -1,4 +1,4 @@
-# generator-ping [![npm version](https://badge.fury.io/js/generator-ping.svg)](https://badge.fury.io/js/generator-ping) [![Build Status](https://travis-ci.org/pierrecle/generator-ping.svg?branch=master)](https://travis-ci.org/pierrecle/generator-ping)
+# generator-ping [![npm version](https://badge.fury.io/js/generator-ping.svg)](https://badge.fury.io/js/generator-ping) [![Build Status](https://travis-ci.org/pierrecle/generator-ping.svg?branch=master)](https://travis-ci.org/pierrecle/generator-ping) [![Coverage Status](https://coveralls.io/repos/github/pierrecle/generator-ping/badge.svg?branch=master)](https://coveralls.io/github/pierrecle/generator-ping?branch=master)
 
 Yeoman generator to bootstrap AngularJs component oriented application, flavored with Typescript and other stuff.
 
@@ -68,3 +68,11 @@ See just below what the generator do to your IDE.
 * some files are excluded from the project tree
 * the `test` task with problem matcher is configured to run `default` gulp task and match Karma errors
 * the `build` task is configured to run `build` gulp task
+
+## Dev notes
+
+To run the tests, simply install `mocha` globally and run:
+
+```sh
+mocha
+```
