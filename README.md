@@ -80,3 +80,10 @@ To run the tests, simply install `mocha` globally and run:
 ```sh
 mocha
 ```
+
+[npm-url]: https://npmjs.org/package/generator-ping
+[npm-image]: http://img.shields.io/npm/v/generator-ping.svg
+[travis-url]: https://travis-ci.org/pierrecle/generator-ping
+[travis-image]: http://img.shields.io/travis/pierrecle/generator-ping.svg
+[coveralls-url]:https://coveralls.io/r/pierrecle/generator-ping
+[coveralls-image]:https://coveralls.io/repos/pierrecle/generator-ping/badge.png
