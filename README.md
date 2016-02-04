@@ -1,6 +1,10 @@
-# generator-ping [![npm version](https://badge.fury.io/js/generator-ping.svg)](https://badge.fury.io/js/generator-ping) [![Build Status](https://travis-ci.org/pierrecle/generator-ping.svg?branch=master)](https://travis-ci.org/pierrecle/generator-ping) [![Coverage Status](https://coveralls.io/repos/github/pierrecle/generator-ping/badge.svg?branch=master)](https://coveralls.io/github/pierrecle/generator-ping?branch=master)
+# generator-ping
 
-Yeoman generator to bootstrap AngularJs component oriented application, flavored with Typescript and other stuff.
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+
+> Yeoman generator to bootstrap AngularJs component oriented application, flavored with Typescript and other stuff.
 
 ## Installation
 
