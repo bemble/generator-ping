@@ -3,4 +3,6 @@ node_js:
   - "4.2.6"
   - "5"
 before_script:
-  - npm install -g mocha
+  - npm install -g mocha istanbul coveralls
+after_script:
+  - npm run coveralls

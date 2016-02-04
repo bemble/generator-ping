@@ -8,7 +8,8 @@
     "generators"
   ],
   "scripts": {
-    "test": "mocha"
+    "test": "istanbul cover _mocha -- -R spec",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
