@@ -1,4 +1,4 @@
-# generator-ping [![npm version](https://badge.fury.io/js/generator-ping.svg)](https://badge.fury.io/js/generator-ping) [![Build Status](https://travis-ci.org/pierrecle/generator-ping.svg?branch=master)](https://travis-ci.org/pierrecle/generator-ping) [![Downloads](http://img.shields.io/npm/dm/generator-ping.svg)](https://npmjs.org/package/generator-ping)
+# generator-ping [![npm version](https://badge.fury.io/js/generator-ping.svg)](https://badge.fury.io/js/generator-ping) [![Build Status](https://travis-ci.org/pierrecle/generator-ping.svg?branch=master)](https://travis-ci.org/pierrecle/generator-ping)
 
 Yeoman generator to bootstrap AngularJs component oriented application, flavored with Typescript and other stuff.
 
