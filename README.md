@@ -81,9 +81,9 @@ To run the tests, simply install `mocha` globally and run:
 mocha
 ```
 
-[npm-url]: https://npmjs.org/package/generator-ping
-[npm-image]: http://img.shields.io/npm/v/generator-ping.svg
-[travis-url]: https://travis-ci.org/pierrecle/generator-ping
-[travis-image]: http://img.shields.io/travis/pierrecle/generator-ping.svg
-[coveralls-url]:https://coveralls.io/r/pierrecle/generator-ping
-[coveralls-image]:https://coveralls.io/repos/pierrecle/generator-ping/badge.png
+[npm-url]:https://npmjs.org/package/generator-ping
+[npm-image]:https://badge.fury.io/js/generator-ping.svg
+[travis-url]:https://travis-ci.org/pierrecle/generator-ping
+[travis-image]:https://travis-ci.org/pierrecle/generator-ping.svg?branch=master
+[coveralls-url]:https://coveralls.io/github/pierrecle/generator-ping?branch=master
+[coveralls-image]:https://coveralls.io/repos/github/pierrecle/generator-ping/badge.svg?branch=master
