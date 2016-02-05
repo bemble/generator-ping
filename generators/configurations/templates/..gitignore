@@ -4,6 +4,9 @@
 node_modules
 bower_components
 typings
+!typings/dev.d.ts
+!typings/karma.d.ts
+!typings/protractor.d.ts
 dist
 src/**/*.js
 src/**/*.css
